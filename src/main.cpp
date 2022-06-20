@@ -79,10 +79,10 @@ void opcontrol() {
     pros::ADIAnalogIn pot('A');
 
 	while (true) {
-        double desiredVel = ((pot.get_value()-10) / 4095.0) * 600;
-		left_mtr.move_velocity(desiredVel);
-        right_mtr.move_velocity(desiredVel);
-        pros::lcd::print(1, "Desired Velocity: %f", desiredVel);
+        double desiredVel = (((pot.get_value()-10) / 4095.0) * 12000) / 20;
+		left_mtr.move_voltage(desiredVel);
+        right_mtr.move_voltage(desiredVel);
+        pros::lcd::print(1, "Estimated Desired Velocity: %f", desiredVel);
         pros::lcd::print(2, "Actual Velocity: %f", left_mtr.get_actual_velocity());
 
 		pros::delay(10);
