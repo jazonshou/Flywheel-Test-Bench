@@ -74,16 +74,21 @@ void autonomous() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	pros::Motor left_mtr(15, pros::motor_gearset_e::E_MOTOR_GEARSET_06, false);
-	pros::Motor right_mtr(16, pros::motor_gearset_e::E_MOTOR_GEARSET_06, true);
+	pros::Motor left_mtr_0(15, pros::motor_gearset_e::E_MOTOR_GEARSET_06, false);
+	pros::Motor right_mtr_0(16, pros::motor_gearset_e::E_MOTOR_GEARSET_06, true);
+    pros::Motor left_mtr_1(2, pros::motor_gearset_e::E_MOTOR_GEARSET_06, false);
+	pros::Motor right_mtr_1(3, pros::motor_gearset_e::E_MOTOR_GEARSET_06, true);
     pros::ADIAnalogIn pot('A');
 
 	while (true) {
-        double desiredVel = (((pot.get_value()-10) / 4095.0) * 12000) / 20;
-		left_mtr.move_voltage(desiredVel);
-        right_mtr.move_voltage(desiredVel);
+        double desiredVel = (((pot.get_value()-10) / 4095.0) * 12000) ;
+		left_mtr_0.move_voltage(desiredVel);
+        right_mtr_0.move_voltage(desiredVel);
+        left_mtr_1.move_voltage(desiredVel);
+        right_mtr_1.move_voltage(desiredVel);
         pros::lcd::print(1, "Estimated Desired Velocity: %f", desiredVel);
-        pros::lcd::print(2, "Actual Velocity: %f", left_mtr.get_actual_velocity());
+        pros::lcd::print(2, "Flywheel 0 Actual Velocity: %f", left_mtr_0.get_actual_velocity());
+        pros::lcd::print(3, "Flywheel 1 Actual Velocity: %f", left_mtr_1.get_actual_velocity());
 
 		pros::delay(10);
 	}
